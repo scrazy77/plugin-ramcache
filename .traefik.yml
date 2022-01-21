@@ -1,0 +1,7 @@
+displayName: RAM Cache
+summary: Simple cache plugin middleware caches responses on RAM.
+type: middleware
+import: github.com/scrazy77/plugin-ramcache
+compatibility: TODO
+testData:
+  maxExpiry: 600

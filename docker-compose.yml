@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    # The official v2.5.6 Traefik docker image
+    image: traefik:v2.5.7
+    # Enables the web UI and tells Traefik to listen to docker
+    command: 
+    - "--api.insecure=true --api.dashboard=true"
+    - "--providers.docker"
+    - "--experimental.localPlugins.ramcache.moduleName=github.com/scrazy77/plugin-ramcache"
+    ports:
+      - "8080:8080"
+      # The Dashboard Web UI 
+      - "9000:9000"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
+      - ./traefik-routers.yaml:/etc/traefik-config/traefik-routers.yaml
+      - .:/plugins-local/src/github.com/scrazy77/plugin-ramcache
+  httpecho:
+    image: hashicorp/http-echo:0.2.3
+    command: ["-text", 'foo']
