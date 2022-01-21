@@ -1,4 +1,4 @@
-# Simple Cache
+# Simple RAM Cache
 
 This is a fork from https://github.com/traefik/plugin-simplecache
 
